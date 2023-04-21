@@ -1,6 +1,6 @@
 <?php
-  if(isset($_POST['button'])){
-    $imgUrl = $_POST['imgurl'];
+  if(isset($_GET['imgurl'])){
+    $imgUrl = $_GET['imgurl'];
     $ch = curl_init($imgUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $downloadImg = curl_exec($ch);
