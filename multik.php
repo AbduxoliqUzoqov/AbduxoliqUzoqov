@@ -1,6 +1,6 @@
 <?php
 
-$token = "5609063335:AAFmzuiT6AuKtjiUB1rEYYxgCL2JkyVIXXE";
+$token = "5541814646:AAF9FepVd2iqm2fK8d1zgZa0riP3k7aKUXA";
 
 /* 
 // http://uzokov1206.clouduz.ru/AbduxoliqUz/Botname.php
