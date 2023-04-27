@@ -1,44 +1,120 @@
-<!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">  
-    <title>NotesApp | Abduxoliq</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Iconscout Link For Icons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-  </head>
+<html>
+<head>
+</head>
   <body>
-    <div class="popup-box">
-      <div class="popup">
-        <div class="content">
-          <header>
-            <p></p>
-            <i class="uil uil-times"></i>
-          </header>
-          <form action="#">
-            <div class="row title">
-              <label>Title</label>
-              <input type="text" spellcheck="false">
-            </div>
-            <div class="row description">
-              <label>Description</label>
-              <textarea spellcheck="false"></textarea>
-            </div>
-            <button></button>
-          </form>
-        </div>
-      </div>
+    <style>
+      
+      @import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap'); body{
+          background-color: #11111d;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          min-height: 100vh;
+          overflow: hidden;
+        }
+        .container{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          background-color: #44475a;
+          width: 500px;
+          height: 280px;
+          
+        }
+        #word{
+          color: #e9fa24;
+          font-size: 30px;
+          letter-spacing: 1.2px;
+          font-family: 'Kdam Thmor Pro', sans-serif;
+        }
+        #input_area{
+          width: 55%;
+          font-size: 15px;
+          padding: 10px;
+          background-color: #11111d;
+          color: #fff;
+          border: 1px solid #e9fa24;
+          outline: none;
+        }
+        .time_section, .score_section{
+          color: #fff;
+          font-size: 18px;
+          font-family: system-ui;
+          font-weight: 600;
+        }
+        .end_game{
+          display: none;
+          background-color: inherit;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          color: #fff;
+          font-family: system-ui;
+          font-weight: 600;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center; width: 100%;
+          height: 100%;
+        }
+        .end_game button{
+          background-color: #F4129D;
+          color: #fff;
+          font-size: 20px;
+          padding: 17px;
+          cursor: pointer;
+          border: none;
+        }
+      
+      
+    </style>
+    <div class="container">
+      <h3 id="word"></h3>
+      <input type="text" id="input_area" placeholder="Typing word...">
+      <p class="time_section">Qolgan vaqt: <span id="time">60s</span></p>
+      <p class="score_section">Ochko: <span id="score">0</span></p>
+      <div class="end_game" id="end_game"></div>
     </div>
-    <div class="wrapper">
-      <li class="add-box">
-        <div class="icon"><i class="uil uil-plus"></i></div>
-        <p>Add new note</p>
-      </li>
-    </div>
-
-    <script src="script.js"></script>
-    
+    <script>
+      const word = document.getElementById('word'); 
+      const text = document.getElementById('input_area');
+      const scoreEl = document.getElementById('score');
+      const timeEl = document.getElementById('time');
+      const endGameEl = document.getElementById('end_game');
+      const words = [ "Npm cache", "Vue", "abduxoliq", "Abduxoliq", "Hacking world", "end", "I", "all", "number", "oil", "Within", "now", "Right", "Feet", "leave", "What", "Now", "Facebook", "came", "Live", "Test", "about", "Abduxoliq", "Came", "Set", "Were", "Follow", "Study", "Day", "Structure", "Over", "Why", "Why", "Talk", "Soon", "Because", "Random", "Watch", "Year", "Her", "Any", "Snapchat", "I", "Both", "Around", "Book", "line", "Mother", "Open", "Now", "Defend", "Mile", "go", "by", "Found", "Said", "Eye", "Come", "So", "Olace", "Food", "Got", "City", "Always", "These", "Any", "Use", "Been", "Was", "Read", "Their", "Without", "As", "Change", "Leave", "Can", "They", "Those", "Eat", "Never", "No", "Eat", "Story", ]
+      let randomWord;
+      let score = 0;
+      let time = 60;
+      function getRandomWord() {
+        return words[Math.floor(Math.random() * words.length)]
+      }
+      function addToDom() { randomWord = getRandomWord()
+        word.innerHTML = randomWord;
+      }
+      function updateScore() { score++;
+        scoreEl.innerHTML = score;
+      }
+      function updateTime() { time--; timeEl.innerHTML = time + "s";
+        if(time === 0) { clearInterval(timeInterval)
+        gameOver();
+        }
+      }
+      const timeInterval = setInterval(updateTime, 1000);
+      function gameOver() { endGameEl.innerHTML =  `<h1>Vaqting tugadiii!</h1>
+        <h3>Sening ochkoing: ${score}</h3>
+        <button onclick="location.reload()">Yangilash</button>`;
+        endGameEl.style.display = "flex";
+      }
+      addToDom(); 
+      text.addEventListener("input", (e) => { const typedText = e.target.value;
+        if(typedText === randomWord){ updateScore();
+        addToDom();
+        e.target.value = ""; 
+        updateTime();
+        }
+        })
+    </script>
   </body>
 </html>
